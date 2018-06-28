@@ -1,0 +1,42 @@
+	<div style="padding :50px">
+		<p><input placeholder="Type to Search..." type="text" ng-model="searchFor" size="30"/></p>
+		<p>
+			There are  {{albums.length}} albums available to view :
+		</p>
+
+		<div class="album panel panel-primary" ng-repeat="album in albums | filter:{title : searchFor} | orderBy:date">
+			<div class="panel-heading">
+				<div style="float:right">{{ album.date }}</div>
+				<a href="/index.html#/album/{{album.name}}">
+				{{album.title }}
+				</a>
+			</div>       
+			<div class="description"> {{album.description}} </div>
+		</div>
+
+		<div style="clear:left"></div>
+		<h3> Add new Album</h3>
+		<div class="album panel panel-default" >
+			<form name="add_album_form" novalidate>
+				<div class="panel-heading">
+					<div class="alert alert-danger" ng-show="add_album_error" > {{add_album_error}}</div>
+					<div style="float:right">
+						<input name="date"  type="text" placeholder="yyyy/mm/dd..." ng-model="adding_album.date" size="10"/>
+					</div>
+
+					<input type="text" placeholder="Title..." ng-model="adding_album.title" size="20"/>
+				</div>
+				<div class="description">
+					<p>
+						<textarea placeholder="Description..." ng-model="adding_album.description" rows="4" style="width: 100%"></textarea></p>
+						<p>
+							<input type="text" ng-model="adding_album.name" placeholder="Name..." style="width: 100%">
+
+						</p>
+						<p>
+							<button ng-click="addAlbum(adding_album)" type="button" class="btn btn-success">Add New Album</button>
+						</p>
+					</div>
+				</div>
+			</form>
+		</div>
